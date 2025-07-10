@@ -6,21 +6,23 @@ class MainWindow(QMainWindow):
         super().__init__()  # Initialize QMainWindow
         self.setWindowTitle("Life App")
         central_widget = QWidget()
+        self.setCentralWidget(central_widget)
         layout = QVBoxLayout(central_widget)
         
         test_button = QPushButton("Test Button")
         test_button2 = QPushButton("Test Mutton")
         
-        layout.addWidget(test_button)
-        
-        self.setCentralWidget(central_widget)
-        
-        stack_wig = QStackedWidget()
-        layout2 = QVBoxLayout(stack_wig)
-        
-        layout.addChildLayout(layout2)
-        layout2.addChildWidget(test_button2)
-        
+        self.stack = QStackedWidget()          # ✅ Create stack early
+        page1 = QWidget()
+        page2 = QWidget()
+        self.stack.addWidget(page1)
+        self.stack.addWidget(page2)
+
+        layout.addWidget(test_button)          # ✅ Add nav button
+        layout.addWidget(self.stack)           # ✅ Then add stack
+
+        test_button.clicked.connect(lambda: self.stack.setCurrentIndex(1))
+
 
 app = QApplication(sys.argv)
 window = MainWindow()
