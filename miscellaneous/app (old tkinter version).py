@@ -1,7 +1,7 @@
 import tkcalendar
 import tkinter as tk
 from dateutil import parser
-from logic import date_logic
+from logic.logic import date_logic
 
 # Main GUI window
 root = tk.Tk()
